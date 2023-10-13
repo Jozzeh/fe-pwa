@@ -23,6 +23,12 @@ html, body, #root {
   height: -webkit-fill-available;
 }
 
+input {
+  &:focus, &:focus-visible, &:focus-within {
+    outline: none;
+  }
+}
+
 h1 {
   @apply text-8xl;
   font-size: clamp(3.5rem, 7vw, 6rem);
