@@ -2,12 +2,22 @@
     // min-height: 100vh;
     // /* mobile viewport bug fix */
     // min-height: -webkit-fill-available;
+    position: relative;
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: scroll;
 }
 
 .chatlog {
     flex: 1;
 }
 
+.message {
+    overflow-anchor: none;
+}
+
+.anchor {
+    overflow-anchor: auto;
+    height: 1px;
+}

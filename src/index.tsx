@@ -7,17 +7,16 @@ import reportWebVitals from './reportWebVitals';
 import './i18n';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ChatPage from './components/pages/ChatPage';
+import './utils/funcs/firebase';
 
 const router = createBrowserRouter([
   {
     index: true,
-    element: <App mode="default" />,
+    element: <App />,
   },
   {
     path: 'chat',
-    element: <App mode="chatting">
-      <ChatPage />
-    </App>,
+    element: <ChatPage />,
   }
 ])
 
