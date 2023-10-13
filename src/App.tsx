@@ -29,7 +29,7 @@ const App: FC<Props> = () => {
   }
   
   return (
-    <div className="p-20 bg-[#2F59F0] relative h-[50vh] flex flex-col items-center justify-center">
+    <div className="p-10 lg:p-20 bg-[#2F59F0] relative h-[50vh] flex flex-col items-center justify-center">
       <div className="mb-6">
         <Icon name="mark_chat_unread" className="text-3xl text-[#99aef7]" />
       </div>
