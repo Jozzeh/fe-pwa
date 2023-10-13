@@ -33,9 +33,9 @@ const App: FC<Props> = () => {
       <div className="mb-6">
         <Icon name="mark_chat_unread" className="text-3xl text-[#99aef7]" />
       </div>
-      <h2 className="text-white text-2xl mb-4">A proof of concept on</h2>
-      <h1 className="font-bold text-white">Push Notifications</h1>
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
+      <h2 className="text-center text-white text-2xl mb-4">A proof of concept on</h2>
+      <h1 className="text-center font-bold text-white">Push Notifications</h1>
+      <div className="absolute bottom-0 flex items-center translate-y-1/2">
         <button 
           onClick={notifyMe} 
           className="rounded-full bg-white py-3 px-5 text-uppercase font-bold text-[#334790] text-lg shadow-xl flex items-center gap-3 border-2 border-solid border-[#d8e1ff] active:scale-90"
