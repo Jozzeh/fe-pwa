@@ -27,7 +27,12 @@ const ChatPage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-      }).then(console.log);
+      }).then(response => {
+        console.log(response);
+        if (response.ok) {
+          setChatText("");
+        }
+      });
     });
   };
 
@@ -41,12 +46,10 @@ const ChatPage = () => {
 
   useEffect(() => {
     getMessages();
-    const un = onMessage(messaging, () => {
+    onMessage(messaging, () => {
       new Notification("Ping!");
       getMessages();
     });
-
-    return un;
   }, []);
 
   return (
