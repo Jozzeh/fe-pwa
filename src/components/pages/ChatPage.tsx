@@ -13,9 +13,11 @@ const ChatPage = () => {
   const chatLog = usePersistentUserStore(store => store.chats);
   const storeChats = usePersistentUserStore(state => state.storeChats);
   const [chatText, setChatText] = useState("");
+  const [flexToken, setFlexToken] = useState("");
 
   const sendMessage = () => {
     tokenGetter().then(currentToken => {
+      setFlexToken(currentToken);
       fetch("https://bechat.josdeberdt.be", {
         method: "POST",
         body: JSON.stringify({
@@ -56,7 +58,12 @@ const ChatPage = () => {
     <div className={styles.chatContainer}>
       <div className="p-6 lg:p-10 flex-1">
         {chatLog.length === 0 ? (
-          <>Nog geen berichten...</>
+          <>
+            Nog geen berichten...
+            <br />
+            <br />
+            {flexToken !== "" ? flexToken : ""}
+          </>
         ) : (
           <div className="">
             {chatLog.map((message, index) => {
