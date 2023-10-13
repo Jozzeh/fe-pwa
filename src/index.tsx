@@ -10,11 +10,11 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 const router = createBrowserRouter([
   {
     index: true,
-    element: <App />,
+    element: <App mode="default" />,
   },
   {
     path: 'chat',
-    element: <></>
+    element: <App mode="chatting" />,
   }
 ])
 
