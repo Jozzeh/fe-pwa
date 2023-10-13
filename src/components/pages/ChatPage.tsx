@@ -3,44 +3,51 @@ import {useEffect, useState} from "react";
 import styles from "./ChatPage.module.scss";
 import Icon from "../basics/Icon/Icon";
 import classNames from "classnames";
-import { usePersistentUserStore } from "../../state/stores/usePersistentUserStore";
+import {usePersistentUserStore} from "../../state/stores/usePersistentUserStore";
 import ScrollAnchor from "../basics/ScrollAnchor/ScrollAnchor";
-import { onMessage } from "firebase/messaging";
-import { messaging, tokenGetter } from "../../utils/funcs/firebase";
+import {onMessage} from "firebase/messaging";
+import {messaging, tokenGetter} from "../../utils/funcs/firebase";
 
 const ChatPage = () => {
   const currentUser = usePersistentUserStore(store => store.userName);
   const chatLog = usePersistentUserStore(store => store.chats);
-  const storeChats = usePersistentUserStore(state => state.storeChats)
-  const [chatText, setChatText] = useState('');
-  
-  const sendMessage = () => {    
-    tokenGetter().then((currentToken) => {
+  const storeChats = usePersistentUserStore(state => state.storeChats);
+  const [chatText, setChatText] = useState("");
+
+  const sendMessage = () => {
+    tokenGetter().then(currentToken => {
       fetch("https://bechat.josdeberdt.be", {
         method: "POST",
         body: JSON.stringify({
-          timestamp: Date.now(), message: chatText, username: currentUser,
-          token: currentToken
+          timestamp: Date.now(),
+          message: chatText,
+          username: currentUser,
+          token: currentToken,
         }),
         headers: {
           "Content-Type": "application/json",
         },
-      }).then(console.log)
-    })
-  }
+      }).then(console.log);
+    });
+  };
+
+  const getMessages = () => {
+    fetch("https://bechat.josdeberdt.be")
+      .then(response => response.json())
+      .then(result => {
+        storeChats(result);
+      });
+  };
 
   useEffect(() => {
+    getMessages();
     const un = onMessage(messaging, () => {
       new Notification("Ping!");
-      fetch("https://bechat.josdeberdt.be")
-        .then(response => response.json())
-        .then(result => {
-          storeChats(result);
-        });
+      getMessages();
     });
-    
+
     return un;
-  }, [])
+  }, []);
 
   return (
     <div className={styles.chatContainer}>
@@ -51,26 +58,27 @@ const ChatPage = () => {
           <div className="">
             {chatLog.map((message, index) => {
               const firstInBunch = index === 0 ? false : chatLog[index - 1].username === message.username;
-              
+
               return (
-                <div key={message.id} className={classNames(
-                  'flex flex-col',
-                  firstInBunch ? 'mt-1' : 'mt-4',
-                  currentUser === message.username ? 'items-end' : 'items-start'
-                )}>
-                  { !firstInBunch && <h5>{ message.username }</h5>}
-                  <div className={
-                    classNames(
+                <div
+                  key={message.id}
+                  className={classNames(
+                    "flex flex-col",
+                    firstInBunch ? "mt-1" : "mt-4",
+                    currentUser === message.username ? "items-end" : "items-start"
+                  )}>
+                  {!firstInBunch && <h5>{message.username}</h5>}
+                  <div
+                    className={classNames(
                       styles.message,
-                      'rounded-full w-fit py-2 px-3',
-                    
-                      currentUser === message.username ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-950',
-                    )
-                  }>
-                    { message.message }
+                      "rounded-full w-fit py-2 px-3",
+
+                      currentUser === message.username ? "bg-blue-600 text-white" : "bg-blue-100 text-blue-950"
+                    )}>
+                    {message.message}
                   </div>
                 </div>
-              )
+              );
             })}
             <ScrollAnchor />
           </div>
@@ -86,9 +94,7 @@ const ChatPage = () => {
             setChatText(evt.target.value);
           }}
         />
-        <button
-          onClick={sendMessage}
-        >
+        <button onClick={sendMessage}>
           <Icon name="send" className="text-[#4768de] text-3xl font-medium" />
         </button>
       </div>
