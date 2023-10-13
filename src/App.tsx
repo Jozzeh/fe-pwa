@@ -32,11 +32,11 @@ const App: FC<Props> = () => {
           <div className={classNames(
             'absolute bottom-0 flex items-center translate-y-1/2',
           )}>
-            <div className="rounded-full bg-white p-2 pl-5 text-uppercase font-bold text-[#334790] text-lg shadow-xl flex items-center gap-3 active:scale-95 outline-none active:outline-none">
+            <div className="rounded-full bg-white p-2 pl-5 text-uppercase font-bold text-[#334790] text-lg shadow-xl flex items-center gap-3 outline-none">
               <input value={userName} onChange={(event) => setUserName(event.target.value)} placeholder="Select a username" className="placeholder:font-medium" />
               <button 
                 onClick={() => subscribePush()} 
-                className="rounded-full bg-[#d8e1ff] w-10 h-10 flex items-center justify-center"
+                className="rounded-full bg-[#d8e1ff] w-10 h-10 flex items-center justify-center active:scale-90"
               >
                 <Icon name="send" className="text-[#4768de] text-2xl" />
               </button>
