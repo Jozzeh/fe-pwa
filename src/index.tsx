@@ -6,6 +6,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import './i18n';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import ChatPage from './components/pages/ChatPage';
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,9 @@ const router = createBrowserRouter([
   },
   {
     path: 'chat',
-    element: <App mode="chatting" />,
+    element: <App mode="chatting">
+      <ChatPage />
+    </App>,
   }
 ])
 

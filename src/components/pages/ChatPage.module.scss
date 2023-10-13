@@ -1,7 +1,8 @@
 .chatContainer {
-    min-height: 100vh;
-    /* mobile viewport bug fix */
-    min-height: -webkit-fill-available;
+    // min-height: 100vh;
+    // /* mobile viewport bug fix */
+    // min-height: -webkit-fill-available;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
